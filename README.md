@@ -1,0 +1,2 @@
+# Emlak
+ Angular İle geliştirilmiştir
