@@ -1,0 +1,409 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid ">
+    <a class="navbar-brand" href="kpal/:id">ÇAKIROĞLU Gayrimenkul</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="kpal/:id">Anasayfa</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="ilanim">İlanlarım</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="favori">Favorilerim</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="iver">İlan Ver</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"(click)="OturumuKapat()" style="cursor:pointer">Çıkış</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container-fluid mt-5">
+  <div class="row">
+    <div class="col-md-12">
+      <h5>Kayıtlar</h5>
+      <table class="table table-hover table-sm">
+        <thead>
+          <td>ID</td>
+          <td>Ürün Adı</td>
+          <td>Ürün Fiyat</td>
+          <td>Oda</td>
+          <td>Salon</td>
+          <td>Banyo</td>
+          <td>Brüt</td>
+          <td>Net</td>
+          <td>Bina Yaşı</td>
+          <td>Bina Kat</td>
+          <td>Aidat</td>
+          <td>Kira</td>
+          <td>Adres</td>
+          <td>Takas</td>
+          <td>Site</td>
+          <td>Cephe</td>
+          <td>Kullanım Durumu</td>
+          <td>Yapı Durumu</td>
+          <td>Yakit</td>
+          <td>Kategori</td>
+          <td>Eşya</td>
+          <td>Tapu</td>
+          <td>BKat</td>
+          <td>Düzenle</td>
+          <td>Sil</td>
+        </thead>
+        <tbody>
+          <tr *ngFor="let Urun of Urunler">
+            <td>{{Urun.id}}</td>
+            <td>{{Urun.urunadi}}</td>
+            <td>{{Urun.urunfiyat}}</td>
+            <td>{{Urun.oda}}</td>
+            <td>{{Urun.salon}}</td>
+            <td>{{Urun.banyo}}</td>
+            <td>{{Urun.brut}}</td>
+            <td>{{Urun.net}}</td>
+            <td>{{Urun.binayas}}</td>
+            <td>{{Urun.binakat}}</td>
+            <td>{{Urun.aidat}}</td>
+            <td>{{Urun.kira}}</td>
+            <td>{{Urun.adres}}</td>
+            <td>{{Urun.Takas}}</td>
+            <td>{{Urun.Site}}</td>
+            <td>{{Urun.Cephe}}</td>
+            <td>{{Urun.KullanimDurumu}}</td>
+            <td>{{Urun.YapiDurumu}}</td>
+            <td>{{Urun.Yakit}}</td>
+            <td>{{Urun.alan}}</td>
+            <td>{{Urun.Esya}}</td>
+            <td>{{Urun.Tapu}}</td>
+            <td>{{Urun.bulkat}}</td>
+            <td><button class="btn btn-outline-warning" (click)="Duzenle(Urun)">Düzenle</button></td>
+            <td><button class="btn btn-outline-danger" (click)="Sil(Urun)">Sil</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <h5>Kayıt Ekle</h5>
+      <form #kayitForm="ngForm" (ngSubmit)="Kaydet()">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label>İlan Başlığı</label>
+            <input type="text" name="urunadi" class="form-control" #urunadi ngModel [(ngModel)]="securun.urunadi"required>
+            <input type="hidden" name="key" class="form-control" #key ngModel [(ngModel)]="securun.key">
+          </div>
+        </div>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>İlan Açıklaması</label>
+                <input type="textarea" name="aciklama" class="form-control" #aciklama ngModel [(ngModel)]="securun.aciklama"required>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Resim Adresi</label>
+                <input type="textarea" name="img" class="form-control" #img ngModel [(ngModel)]="securun.img"required>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Fiyatı</label>
+                <input type="text" name="urunfiyat" class="form-control" #urunfiyat ngModel [(ngModel)]="securun.urunfiyat" required>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Oda</label>
+                <input type="number" name="oda" class="form-control" #oda ngModel [(ngModel)]="securun.oda" required>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Salon</label>
+                <input type="number" name="salon" class="form-control" #salon ngModel [(ngModel)]="securun.salon" required>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Banyo</label>
+                <input type="number" name="Banyo" class="form-control" #banyo ngModel [(ngModel)]="securun.banyo" required>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Brüt</label>
+                <input type="text" name="brut" class="form-control" #brut ngModel [(ngModel)]="securun.brut" required>
+              </div>
+            </div>
+            
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Net</label>
+                <input type="text" name="net" class="form-control" #net ngModel [(ngModel)]="securun.net" required>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Bina Yaşı</label>
+                <input type="number" name="binayas" class="form-control" #binayas ngModel [(ngModel)]="securun.binayas" required>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+              <label>Bina Katı</label>
+              <input type="number" name="binakat" class="form-control" #binakat ngModel [(ngModel)]="securun.binakat" required>
+            </div></div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Aidat</label>
+                <input type="text" name="aidat" class="form-control" #aidat ngModel [(ngModel)]="securun.aidat" required>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Kira</label>
+                <input type="text" name="kira" class="form-control" #kira ngModel [(ngModel)]="securun.kira" required>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Adres</label>
+                <input type="text" name="adres" class="form-control" #adres ngModel [(ngModel)]="securun.adres" required>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Bulunduğu Kat</label>
+                <input type="text" name="bulkat" class="form-control" #bulkat ngModel [(ngModel)]="securun.bulkat" required>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4">
+              <nav class="nav1">
+                <label for="touch"><span>Takas</span></label>               
+                <input type="checkbox" id="touch">
+                <ul class="slide">
+                  <li *ngFor="let Takas of Takasd"><input class="example-radio" type="radio" name="Takas" value={{Takas.durum}} #Takas ngModel [(ngModel)]="securun.Takas" required><p class="yana">{{Takas.durum}}</p></li> 
+                </ul> 
+              </nav>
+            </div>
+            <div class="col-md-4">
+              <nav class="nav1">
+                <label for="touch6"><span>Kategori</span></label>               
+                <input type="checkbox" id="touch6">
+                <ul class="slide">
+                  <li *ngFor="let alan of ATuru"><input class="example-radio" type="radio" name="alan" value={{alan.alantur}} #alan ngModel [(ngModel)]="securun.alan" required><p class="yana">{{alan.alantur}}</p></li> 
+                </ul> 
+              </nav>
+            </div>
+            <div class="col-md-4"><nav class="nav1">
+              <label for="touch2"><span>Cephe</span></label>               
+              <input type="checkbox" id="touch2">
+              <ul class="slide">
+                <li *ngFor="let Cephe of CepheYon"><input class="example-radio" type="radio" name="Cephe" value={{Cephe.cdurum}} #Cephe ngModel [(ngModel)]="securun.Cephe" required><p class="yana">{{Cephe.cdurum}}</p></li> 
+              </ul> 
+            </nav></div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4">
+              <nav class="nav1">
+                <label for="touch3"><span>Kullanım Durumu</span></label>               
+                <input type="checkbox" id="touch3">
+                <ul class="slide">
+                  <li *ngFor="let KullanimDurumu of KulDurumu"><input class="example-radio" type="radio" name="KullanimDurumu" value={{KullanimDurumu.kdurum}} #KullanimDurumu ngModel [(ngModel)]="securun.KullanimDurumu" required><p class="yana">{{KullanimDurumu.kdurum}}</p></li> 
+                </ul> 
+              </nav>
+            </div>
+            <div class="col-md-4">
+              <nav class="nav1">
+                <label for="touch4"><span>Yakıt</span></label>               
+                <input type="checkbox" id="touch4">
+                <ul class="slide">
+                  <li *ngFor="let Yakit of Yakitd"><input class="example-radio" type="radio" name="Yakit" value={{Yakit.yakitad}} #Yakit ngModel [(ngModel)]="securun.Yakit" required><p class="yana">{{Yakit.yakitad}}</p></li> 
+                </ul> 
+              </nav>
+            </div>
+            <div class="col-md-4">
+              <nav class="nav1">
+                <label for="touch5"><span>Yapı Durumu</span></label>               
+                <input type="checkbox" id="touch5">
+                <ul class="slide">
+                  <li *ngFor="let YapiDurumu of YapiD"><input class="example-radio" type="radio" name="YapiDurumu" value={{YapiDurumu.ydurum}} #YapiDurumu ngModel [(ngModel)]="securun.YapiDurumu" required><p class="yana">{{YapiDurumu.ydurum}}</p></li> 
+                </ul> 
+              </nav>
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4">
+              <nav class="nav1">
+                <label for="touch7"><span>Esya</span></label>               
+                <input type="checkbox" id="touch7">
+                <ul class="slide">
+                  <li *ngFor="let Esya of Esyad"><input class="example-radio" type="radio" name="Esya" value={{Esya.esyat}} #Esya ngModel [(ngModel)]="securun.Esya" required><p class="yana">{{Esya.esyat}}</p></li> 
+                </ul> 
+              </nav>
+            </div>
+            <div class="col-md-4">
+              <nav class="nav1">
+                <label for="touch8"><span>Tapu</span></label>               
+                <input type="checkbox" id="touch8" >
+                <ul class="slide">
+                  <li *ngFor="let Tapu of Tapud"><input class="example-radio" type="radio" name="Tapu" value={{Tapu.tap}} #Tapu ngModel [(ngModel)]="securun.Tapu" required><p class="yana">{{Tapu.tap}}</p></li> 
+                </ul> 
+              </nav>
+            </div>
+            <div class="col-md-4">
+              <nav class="nav1">
+                <label for="touch1"><span>Site</span></label>               
+                <input type="checkbox" id="touch1">
+                <ul class="slide">
+                  <li *ngFor="let Site of Sitemi"><input class="example-radio" type="radio" name="Site" value={{Site.sdurum}} #Site ngModel [(ngModel)]="securun.Site" required><p class="yana">{{Site.sdurum}}</p></li> 
+                </ul> 
+              </nav>
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row ">
+            <div class="btn btn-transparent btn-block " >
+              <input type="submit" value="Kaydet" class="btn btn-outline-success btn-block" style="width: 100%;" [disabled]="kayitForm.invalid">
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row">
+            <div class="btn btn-transparent ml-3 mt-2">
+              <button style="width: 100%;" class="btn btn-outline-danger ml-3" (click)="Vazgec()">Vazgeç</button>
+              <div class="mt-3" [ngClass]="sonuc.islem ? 'alert alert-success':'alert alert-danger'"
+                *ngIf="sonuc.mesaj?.length>0">{{sonuc.mesaj}}</div>
+            </div>
+          </div>
+        </div>
+      </form>
+  </div>
+</div>
+<footer class="py-2 footerbody" style="background-color: #222;">
+  <div class="container text-white mt-4">
+      <div class="row">
+          <div class="col-4 col-md-3">
+              <h3><b><a class="kısa" href="/">ÇAKIROĞLU Gayrimenkul</a></b></h3>
+              <div class="col-md-6 popup-container">
+                  <label class="button" for="login-popup">Bize Ulaşın</label>
+                  <input class="input1" type="checkbox" id="login-popup">
+                  <div class="popup">
+                      <label for="login-popup"></label>
+                      <div class="inner">
+                          <div class="title">
+                              <h6 class="mt-2">İLETİŞİM FORMU</h6>
+                          </div>
+                          <div class="content">
+                              <label for="name"></label>
+                              <input class="input1" type="text" name="name" required="" placeholder="Ad-Soyad" autocomplete="nickname">
+                              <label for="mail"></label>
+                              <input class="input1" type="email" name="mail" required="" placeholder="E-mail" autocomplete="email">
+                              <label for="text"></label>
+                              <textarea name="" id="" cols="30" rows="1" required="" placeholder="KONU" autocomplete="false"></textarea>
+                              <label class="input1" for="text"></label>
+                              <textarea class="textarea1" name="" id="" cols="30" rows="10" required="" placeholder="AÇILAMANIZ"></textarea>
+                              <button class="button1" type="submit">GÖNDER</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-md-6 popup-container1 ">
+                  <label class="button2" for="login-popup1">İletişim</label>
+                  <input class="input1"type="checkbox" id="login-popup1">
+                  <div class="popup1">
+                      <label for="login-popup1"></label>
+                      <div class="inner1">
+                          <div class="title1">
+                              <h6 class="mt-2">İLETİŞİM</h6>
+                          </div>
+                          <div class="content1 table1">
+                              <table class="tablo  mt-4">
+                                  <tr>
+                                      <td class="col-md-6 baslık">Müşteri Hizmetleri</td>
+                                      <th class="col-md-6 alt">0212 999 99 99 <br>0850 999 99 99</th>
+                                  </tr>
+                                  <tr>
+                                      <td class="col-md-6 baslık">E-Mail</td>
+                                      <th class="col-md-6 alt">bilgi@marka.com</th>
+                                  </tr>
+                                  <tr>
+                                      <td class="col-md-6 baslık">Teknik Destek</td>
+                                      <th class="col-md-6 alt">0535 999 99 99 <br>0850 999 99 99 </th>
+                                  </tr>
+                                  <tr>
+                                      <td class="col-md-6 baslık">Destek Sistemi</td>
+                                      <th class="col-md-6 alt">destek@marka.com</th>
+                                  </tr>
+                                  <tr>
+                                      <td class="col-md-6 baslık">Faks</td>
+                                      <th class="col-md-6 alt">0212 999 99 99</th>
+                                  </tr>
+                                  <tr>
+                                      <td class="col-md-6 baslık">Adres</td>
+                                      <th class="col-md-6 alt">Pınarbaşı, Akdeniz Ünv. No:21, 07070 Konyaaltı/Antalya</th>
+                                  </tr>
+                                  <br>
+                                  <br>
+                                  <br>
+                              </table>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-4 col-md-2">
+              <ul class="list-unstyled">
+                <li type="button"><a class="kısa" href="/">Anasayfa</a> </li>
+                  <li type="button"><a class="kısa" href="ilanim">İlanlarım</a></li>
+                  <li type="button"><a class="kısa" href="favori">Favorilerim</a></li>
+                  <li type="button"><a class="kısa" href="iver">İlan Ver</a></li>
+                  <li type="button"><a class="kısa" href="kpal">Çıkış</a></li>
+              </ul>
+          </div>
+          <div class="col-md-3">
+          </div>
+          <div class="clearfix"></div>
+          <p class="text-center"><small>&#169; TÜM HAKLARI SAKLIDIR</small></p>
+      </div>
+  </div>
+</footer>

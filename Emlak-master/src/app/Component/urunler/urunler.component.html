@@ -1,0 +1,90 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid ">
+    <a class="navbar-brand" href="udz">ÇAKIROĞLU Gayrimenkul</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="udz">Düzenleme</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="urunlerim">Ürunler</a>
+        </li>
+        <li class="nav-item">
+          <button class="btn btn-outline-danger btn-sm ml-2" (click)="OturumuKapat()">Oturumu Kapat</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container-fluid mt-5">
+  <div class="row">
+    <div class="col-md-12">
+      <h5>İLANLAR</h5>
+      <table class="table table-hover table-sm">
+        <thead>
+          <td>ID</td>
+          <td>Ürün Adı</td>
+          <td>Ürün Fiyat</td>
+          <td>Oda</td>
+          <td>Salon</td>
+          <td>Banyo</td>
+          <td>Brüt</td>
+          <td>Net</td>
+          <td>Bina Yaşı</td>
+          <td>Bina Kat</td>
+          <td>Aidat</td>
+          <td>Kira</td>
+          <td>Adres</td>
+          <td>Takas</td>
+          <td>Site</td>
+          <td>Cephe</td>
+          <td>Kullanım Durumu</td>
+          <td>Yapı Durumu</td>
+          <td>Yakit</td>
+          <td>Kategori</td>
+          <td>Tapu</td>
+          <td>BKat</td>
+          <td>Açıklama</td>
+        </thead>
+        <tbody>
+          <tr *ngFor="let Urun of Urunler">
+            <td>{{Urun.id}}</td>
+            <td>{{Urun.urunadi}}</td>
+            <td>{{Urun.urunfiyat}}</td>
+            <td>{{Urun.oda}}</td>
+            <td>{{Urun.salon}}</td>
+            <td>{{Urun.banyo}}</td>
+            <td>{{Urun.brut}}</td>
+            <td>{{Urun.net}}</td>
+            <td>{{Urun.binayas}}</td>
+            <td>{{Urun.binakat}}</td>
+            <td>{{Urun.aidat}}</td>
+            <td>{{Urun.kira}}</td>
+            <td>{{Urun.adres}}</td>
+            <td>{{Urun.Takas}}</td>
+            <td>{{Urun.Site}}</td>
+            <td>{{Urun.Cephe}}</td>
+            <td>{{Urun.KullanimDurumu}}</td>
+            <td>{{Urun.YapiDurumu}}</td>
+            <td>{{Urun.Yakit}}</td>
+            <td>{{Urun.alan}}</td>
+            <td>{{Urun.Tapu}}</td>
+            <td>{{Urun.bulkat}}</td>
+            <td>{{Urun.img}}</td>
+            <td><button class="btn btn-outline-danger" (click)="Sil(Urun)">Sil</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="btn btn-transparent ml-3 mt-2" *ngIf="securun.key!=''">
+      <button style="width: 100%;" class="btn btn-outline-danger ml-3">Vazgeç</button>
+    </div>
+  </div>
+</div>

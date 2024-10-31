@@ -1,0 +1,177 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid ">
+    <a class="navbar-brand" href="/">ÇAKIROĞLU Gayrimenkul</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/">Anasayfa</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="kiralık" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Satılık & Kiralık
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li  *ngFor="let Kategori of Kategoriler">
+            <a class="dropdown-item" href="kiralık">{{Kategori.katAdi}}</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="uyeol">İlan Ver</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="giris">GİRİŞ</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="yonet"></a>
+        </li>
+        <!--<li class="nav-item text-nowrap">
+          <a *ngIf="isLoggedin()==true" (click)="logout" class="nav-link" routerLink="/giris">ÇIKIŞ</a>
+        </li>-->
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<section>
+  <div class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img  class="d-block w-100" src="assets\slider\img1.jpg" style="height: 600px; width: 100%; object-fit:cover;" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img  class="d-block w-100"  src="assets\slider\img2.jpg" style="height: 600px; width: 100%; object-fit:cover;" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img  class="d-block w-100"  src="assets\slider\img3.jpg" style="height: 600px; width: 100%; object-fit:cover;" alt="...">
+      </div>
+      <div class="carousel-caption d-none d-md-block">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+          <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="altmenu">
+              <div class="navbar-nav">
+                <a class="nav-link active" aria-current="page" href="#">Satılık</a>
+                <a class="nav-link" href="#">Kiralık</a>
+                <a class="nav-link" href="#">Projeler</a>
+              </div>
+            </div>
+          </div>
+        </nav>
+        <div class="mt-5">
+          <label for="Satılık"></label>
+          <select class="combo" name="satılık" id="sat" aria-placeholder="Satılık Konut">
+            <option value="satılık">Satılık</option>
+            <option value="Kiralık">Kiralık</option>
+          </select>
+          <input type="text" class="input2 ara " placeholder="İL, ilçe, mahalle," (keyup)="Ara($event.target.value)">
+          <button class="ara">Ara</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="mt-5" >
+    <div class="row">
+      <div class=" card mt-5 kenarakay hover-overlay-container" *ngFor="let Urun of Urunler" style="width: 27rem;">
+        <div class="card-body" >
+          <img class="overlay-image" src={{Urun.img}} alt="" style="height: 300px; width: 100%; object-fit:cover;">
+          <p class="mt-3 overlay-image ilanp">{{Urun.aciklama}}</p>
+          <div class="overlay-btn-container">
+            <a href="#" class="overlay-btn"  [routerLink]="['/urund',Urun.key]" >İlanı Gör</a>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<footer class="py-2 footerbody" style="background-color: #222;">
+  <div class="container text-white mt-4">
+      <div class="row">
+          <div class="col-4 col-md-3">
+              <h3><b><a class="kısa" href="/">ÇAKIROĞLU Gayrimenkul</a></b></h3>
+              <div class="col-md-6 popup-container">
+                  <label class="button" for="login-popup">Bize Ulaşın</label>
+                  <input class="input1" type="checkbox" id="login-popup">
+                  <div class="popup">
+                      <label for="login-popup"></label>
+                      <div class="inner">
+                          <div class="title">
+                              <h6 class="mt-2">İLETİŞİM FORMU</h6>
+                          </div>
+                          <div class="content">
+                              <label for="name"></label>
+                              <input class="input1" type="text" name="name" required="" placeholder="Ad-Soyad" autocomplete="nickname">
+                              <label for="mail"></label>
+                              <input class="input1" type="email" name="mail" required="" placeholder="E-mail" autocomplete="email">
+                              <label for="text"></label>
+                              <textarea name="" id="" cols="30" rows="1" required="" placeholder="KONU" autocomplete="false"></textarea>
+                              <label class="input1" for="text"></label>
+                              <textarea class="textarea1" name="" id="" cols="30" rows="10" required="" placeholder="AÇILAMANIZ"></textarea>
+                              <button class="button1" type="submit">GÖNDER</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-md-6 popup-container1 ">
+                  <label class="button2" for="login-popup1">İletişim</label>
+                  <input class="input1"type="checkbox" id="login-popup1">
+                  <div class="popup1">
+                      <label for="login-popup1"></label>
+                      <div class="inner1">
+                          <div class="title1">
+                              <h6 class="mt-2">İLETİŞİM</h6>
+                          </div>
+                          <div class="content1">
+                              <table class="tablo mt-4">
+                                  <tr>
+                                      <td class="col-md-6 baslık">Müşteri Hizmetleri</td>
+                                      <th class="col-md-6 alt">0212 999 99 99 <br>0850 999 99 99</th>
+                                  </tr>
+                                  <tr>
+                                      <td class="col-md-6 baslık">E-Mail</td>
+                                      <th class="col-md-6 alt">bilgi@marka.com</th>
+                                  </tr>
+                                  <tr>
+                                      <td class="col-md-6 baslık">Teknik Destek</td>
+                                      <th class="col-md-6 alt">0535 999 99 99 <br>0850 999 99 99 </th>
+                                  </tr>
+                                  <tr>
+                                      <td class="col-md-6 baslık">Destek Sistemi</td>
+                                      <th class="col-md-6 alt">destek@marka.com</th>
+                                  </tr>
+                                  <tr>
+                                      <td class="col-md-6 baslık">Faks</td>
+                                      <th class="col-md-6 alt">0212 999 99 99</th>
+                                  </tr>
+                                  <tr>
+                                      <td class="col-md-6 baslık">Adres</td>
+                                      <th class="col-md-6 alt">Pınarbaşı, Akdeniz Ünv. No:21, 07070 Konyaaltı/Antalya</th>
+                                  </tr>
+                                  <br>
+                                  <br>
+                                  <br>
+                              </table>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-4 col-md-2">
+              <ul class="list-unstyled">
+                <li type="button"><a class="kısa" href="/">Anasayfa</a> </li>
+                  <li type="button"><a class="kısa" href="giris">Giriş</a></li>
+                  <li type="button"><a class="kısa" href="uyeol">İlan Ver</a></li>
+                  <li type="button"><a class="kısa" href="kiralık">Satılık & Kiralık</a></li>
+              </ul>
+          </div>
+          <div class="col-md-3">
+          </div>
+          <div class="clearfix"></div>
+          <p class="text-center"><small>&#169; TÜM HAKLARI SAKLIDIR</small></p>
+      </div>
+  </div>
+</footer>

@@ -1,0 +1,961 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid ">
+      <a class="navbar-brand" href="udz">ÇAKIROĞLU Gayrimenkul</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <button class="btn btn-outline-danger btn-sm ml-2" (click)="OturumuKapat()">Oturumu Kapat</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="">
+  <div class="row">
+    <div class="col-md-3">
+      <ul class="ul1">
+        <li class="li1"><a class=" a1" href="udz">Düzenleme</a></li>
+      
+        <li class="li1"><a class="a1" href="urunlerim">Ürunler</a></li>
+      
+        <li class="li1"><a class="a1" href="yonet" (click)="OturumuKapat()">ÇIKIŞ</a></li>
+      </ul>
+    </div>
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card sag1" style="width: 550px;">
+                    <div class="card-header" style="background-color: black;"></div>
+                    <div class="card-body" style="background-color: rgb(59, 59, 59); text-align: center;">
+                        <div class="col-md-6 popup-container">
+                            <label class="button sag3 " for="login-popup9">Üye Silme</label>
+                            <input class="input1" type="checkbox" id="login-popup9">
+                            <div class="popup">
+                                <label for="login-popup9"></label>
+                                <div class="inner">
+                                    <div class="title">
+                                        <h6 class="mt-2">Üye Silme FORMU</h6>
+                                    </div>
+                                    <div class="col-md-9 sag">
+                                        <div class="container-fluid mt-5">
+                                          <div class="row">
+                                            <div class="col-md-12">
+                                              <h5>Kayıtlar</h5>
+                                              <table class="table table-hover table-sm">
+                                                <thead>
+                                                  <td>ID</td>
+                                                  <td>AD SOYAD</td>
+                                                  <td>KULLANICI ADI</td>
+                                                  <td>E-MAİL</td>
+                                                  <td>ŞİFRE</td>
+                                                  <td>SİL</td>
+                                                </thead>
+                                                <tbody>
+                                                  <tr *ngFor="let Uye of uyeler">
+                                                    <td>{{Uye.id}}</td>
+                                                    <td>{{Uye.adsoyad}}</td>
+                                                    <td>{{Uye.kadi}}</td>
+                                                    <td>{{Uye.mail}}</td>
+                                                    <td>{{Uye.parola}}</td>
+                                                    <td><button class="btn btn-outline-danger" (click)="Sil(Uye)">Sil</button></td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="container">
+                                          <div class="row">
+                                            <div class="btn btn-transparent ml-3 mt-2" *ngIf="secuyem.id!=0">
+                                              <button style="width: 100%;" class="btn btn-outline-danger ml-3">Vazgeç</button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer" style="background-color: black;"></div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card sag2" style="width: 570px;">
+                    <div class="card-header" style="background-color: black;"></div>
+                    <div class="card-body" style="background-color: rgb(59, 59, 59); text-align: center;">
+                        <div class="col-md-6 popup-container">
+                            <label class="button sag3" for="login-popup10">Kategori</label>
+                            <input class="input1" type="checkbox" id="login-popup10">
+                            <div class="popup">
+                                <label for="login-popup10"></label>
+                                <div class="inner">
+                                    <div class="title">
+                                        <h6 class="mt-2">Kategori Düzenleme / Ekleme / Silme</h6>
+                                    </div>
+                                    <div class="col-md-9 sag">
+                                        <div class="container-fluid mt-5">
+                                          <div class="row">
+                                            <div class="col-md-12">
+                                              <h5>KATEGORİLER</h5>
+                                              <table class="table table-hover table-sm">
+                                                <thead>
+                                                  <td>ID</td>
+                                                  <td>KATEGORİ ADI</td>
+                                                  <td>DÜZENLE</td>
+                                                  <td>SİL</td>
+                                                </thead>
+                                                <tbody>
+                                                  <tr *ngFor="let Kategori of Kategoriler">
+                                                    <td>{{Kategori.id}}</td>
+                                                    <td>{{Kategori.katAdi}}</td>
+                                                    <td><button class="btn btn-outline-warning" (click)="KatDuzenle(Kategori)">Düzenle</button></td>
+                                                    <td><button class="btn btn-outline-danger" (click)="KatSil(Kategori)">Sil</button></td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="container">
+                                          <div class="row">
+                                            <h5>Kategori Ekle</h5>
+                                              <form #KatkayitForm="ngForm" (ngSubmit)="KatKaydet()">
+                                                <div class="col-md-12">
+                                                  <div class="form-group">
+                                                    <label>Kategori Adı</label>
+                                                    <input type="text" name="katAdi" class="form-control" #katAdi ngModel [(ngModel)]="seckat.katAdi"
+                                                      required>
+                                                    <input type="hidden" name="id" class="form-control" #id ngModel [(ngModel)]="seckat.id">
+                                                  </div>
+                                                  <div class="container">
+                                                    <div class="row ">
+                                                      <div class="btn btn-transparent btn-block " >
+                                                        <input type="submit" value="Kaydet" class="btn btn-outline-success btn-block" style="width: 100%;" [disabled]="KatkayitForm.invalid">
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                  <div class="container">
+                                                    <div class="row">
+                                                      <div class="btn btn-transparent ml-3 mt-2" *ngIf="seckat.id!=0">
+                                                        <div class="mt-3" [ngClass]="sonuc.islem ? 'alert alert-success':'alert alert-danger'"
+                                                          *ngIf="sonuc.mesaj?.length>0">{{sonuc.mesaj}}</div>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </form>
+                                          </div>
+                                        </div>
+                                      </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer" style="background-color: black;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card sag1" style="width: 360px;">
+                    <div class="card-header" style="background-color: black;"></div>
+                    <div class="card-body" style="background-color: rgb(59, 59, 59); text-align: center;">
+                        <div class="col-md-9">
+                            <div class="popup-container">
+                                <label class="button sag4" for="login-popup">Cephe</label>
+                                <input class="input1" type="checkbox" id="login-popup">
+                                <div class="popup">
+                                    <label for="login-popup"></label>
+                                    <div class="inner">
+                                        <div class="title">
+                                            <h6 class="mt-2">Cephe Yön Duzenleme / Sil / Ekle</h6>
+                                        </div>
+                                        <div class="col-md-9 sag">
+                                            <div class="container mt-5">
+                                              <div class="row">
+                                                <div class="col-md-12">
+                                                  <h5>Cepheler</h5>
+                                                  <table class="table table-hover table-sm">
+                                                    <thead>
+                                                      <td>Key</td>
+                                                      <td>Cephe Yönü</td>
+                                                      <td>DÜZENLE</td>
+                                                      <td>SİL</td>
+                                                    </thead>
+                                                    <tbody>
+                                                      <tr *ngFor="let Cephe of CepheYon">
+                                                        <td>{{Cephe.key}}</td>
+                                                        <td>{{Cephe.cdurum}}</td>
+                                                        <td><button class="btn btn-outline-warning" (click)="CepheDuzenle(Cephe)">Düzenle</button></td>
+                                                        <td><button class="btn btn-outline-danger" (click)="CepheSil(Cephe)">Sil</button></td>
+                                                      </tr>
+                                                    </tbody>
+                                                  </table>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="container">
+                                              <div class="row">
+                                                <h5 class="mt-3">Cephe Ekle</h5>
+                                                  <form #CephekayitForm="ngForm" (ngSubmit)="CepheKaydet()">
+                                                    <div class="col-md-12">
+                                                      <div class="form-group">
+                                                        <label class="label1 mt-2">Cephe Adı</label>
+                                                        <input type="text" name="katAdi" class="form-control" #katAdi ngModel [(ngModel)]="seccephe.cdurum"
+                                                          required>
+                                                        <input type="hidden" name="id" class="form-control" #id ngModel [(ngModel)]="seccephe.key">
+                                                      </div>
+                                                      <div class="container">
+                                                        <div class="row ">
+                                                          <div class="btn btn-transparent btn-block " >
+                                                            <input type="submit" value="Kaydet" class="btn btn-outline-success btn-block" style="width: 100%;" [disabled]="CephekayitForm.invalid">
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                      <div class="container">
+                                                        <div class="row">
+                                                          <div class="btn btn-transparent ml-3 mt-2" *ngIf="seccephe.id!=0">
+                                                            <div class="mt-3" [ngClass]="sonuc.islem ? 'alert alert-success':'alert alert-danger'"
+                                                              *ngIf="sonuc.mesaj?.length>0">{{sonuc.mesaj}}</div>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                  </form>
+                                              </div>
+                                            </div>
+                                          </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div></div>
+                    <div class="card-footer" style="background-color: black;"></div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card sag1" style="width: 360px;">
+                    <div class="card-header" style="background-color: black;"></div>
+                    <div class="card-body" style="background-color: rgb(59, 59, 59); text-align: center;">
+                        <div class="col-md-9">
+                            <div class="popup-container">
+                                <label class="button sag4" for="login-popup1">Eşya</label>
+                                <input class="input1" type="checkbox" id="login-popup1">
+                                <div class="popup">
+                                    <label for="login-popup1"></label>
+                                    <div class="inner">
+                                        <div class="title">
+                                            <h6 class="mt-2">Eşya Durumu Duzenleme / Sil / Ekle</h6>
+                                        </div>
+                                        <div class="col-md-9 sag">
+                                            <div class="container mt-5">
+                                              <div class="row">
+                                                <div class="col-md-12">
+                                                  <h5>Eşya Durumu</h5>
+                                                  <table class="table table-hover table-sm">
+                                                    <thead>
+                                                      <td>Key</td>
+                                                      <td>Eşya Durumu</td>
+                                                      <td>DÜZENLE</td>
+                                                      <td>SİL</td>
+                                                    </thead>
+                                                    <tbody>
+                                                      <tr *ngFor="let Esya of Esyad">
+                                                        <td>{{Esya.key}}</td>
+                                                        <td>{{Esya.esyat}}</td>
+                                                        <td><button class="btn btn-outline-warning" (click)="EsyaDuzenle(Esya)">Düzenle</button></td>
+                                                        <td><button class="btn btn-outline-danger" (click)="EsyaSil(Esya)">Sil</button></td>
+                                                      </tr>
+                                                    </tbody>
+                                                  </table>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="container">
+                                              <div class="row">
+                                                <h5 class="mt-3">Esya Durumu Ekle</h5>
+                                                  <form #EsyakayitForm="ngForm" (ngSubmit)="EsyaKaydet()">
+                                                    <div class="col-md-12">
+                                                      <div class="form-group">
+                                                        <label class="label1 mt-2">Esya Durumu Adı</label>
+                                                        <input type="text" name="esyat" class="form-control" #esyat ngModel [(ngModel)]="secesya.esyat"
+                                                          required>
+                                                        <input type="hidden" name="id" class="form-control" #id ngModel [(ngModel)]="secesya.key">
+                                                      </div>
+                                                      <div class="container">
+                                                        <div class="row ">
+                                                          <div class="btn btn-transparent btn-block " >
+                                                            <input type="submit" value="Kaydet" class="btn btn-outline-success btn-block" style="width: 100%;" [disabled]="EsyakayitForm.invalid">
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                      <div class="container">
+                                                        <div class="row">
+                                                          <div class="btn btn-transparent ml-3 mt-2" *ngIf="secesya.id!=0">
+                                                            <div class="mt-3" [ngClass]="sonuc.islem ? 'alert alert-success':'alert alert-danger'"
+                                                              *ngIf="sonuc.mesaj?.length>0">{{sonuc.mesaj}}</div>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                  </form>
+                                              </div>
+                                            </div>
+                                          </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer" style="background-color: black;"></div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card sag1" style="width: 360px;">
+                    <div class="card-header" style="background-color: black;"></div>
+                    <div class="card-body" style="background-color: rgb(59, 59, 59); text-align: center;">
+                        <div class="col-md-9">
+                            <div class="popup-container">
+                                <label class="button sag4" for="login-popup2">Kullanım Durumu</label>
+                                <input class="input1" type="checkbox" id="login-popup2">
+                                <div class="popup">
+                                    <label for="login-popup2"></label>
+                                    <div class="inner">
+                                        <div class="title">
+                                            <h6 class="mt-2">Kullanım Durumu Duzenleme / Sil / Ekle</h6>
+                                        </div>
+                                        <div class="col-md-9 sag">
+                                            <div class="container mt-5">
+                                              <div class="row">
+                                                <div class="col-md-12">
+                                                  <h5>Kullanım Durumu</h5>
+                                                  <table class="table table-hover table-sm">
+                                                    <thead>
+                                                      <td>Key</td>
+                                                      <td>Kullanım Durumu</td>
+                                                      <td>DÜZENLE</td>
+                                                      <td>SİL</td>
+                                                    </thead>
+                                                    <tbody>
+                                                      <tr *ngFor="let KullanimDurumu of KulDurumu">
+                                                        <td>{{KullanimDurumu.key}}</td>
+                                                        <td>{{KullanimDurumu.kdurum}}</td>
+                                                        <td><button class="btn btn-outline-warning" (click)="KulDuzenle(KullanimDurumu)">Düzenle</button></td>
+                                                        <td><button class="btn btn-outline-danger" (click)="KulSil(KullanimDurumu)">Sil</button></td>
+                                                      </tr>
+                                                    </tbody>
+                                                  </table>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="container">
+                                              <div class="row">
+                                                <h5 class="mt-3">Kullanım Durumu Ekle</h5>
+                                                  <form #KulkayitForm="ngForm" (ngSubmit)="KulKaydet()">
+                                                    <div class="col-md-12">
+                                                      <div class="form-group">
+                                                        <label class="label1 mt-2">Kullanım Durumu Adı</label>
+                                                        <input type="text" name="kdurum" class="form-control" #kdurum ngModel [(ngModel)]="seckul.kdurum"
+                                                          required>
+                                                        <input type="hidden" name="id" class="form-control" #id ngModel [(ngModel)]="seckul.key">
+                                                      </div>
+                                                      <div class="container">
+                                                        <div class="row ">
+                                                          <div class="btn btn-transparent btn-block " >
+                                                            <input type="submit" value="Kaydet" class="btn btn-outline-success btn-block" style="width: 100%;" [disabled]="KulkayitForm.invalid">
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                      <div class="container">
+                                                        <div class="row">
+                                                          <div class="btn btn-transparent ml-3 mt-2" *ngIf="seckul.id!=0">
+                                                            <div class="mt-3" [ngClass]="sonuc.islem ? 'alert alert-success':'alert alert-danger'"
+                                                              *ngIf="sonuc.mesaj?.length>0">{{sonuc.mesaj}}</div>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                  </form>
+                                              </div>
+                                            </div>
+                                          </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer" style="background-color: black;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card sag1" style="width: 360px;">
+                    <div class="card-header" style="background-color: black;"></div>
+                    <div class="card-body" style="background-color: rgb(59, 59, 59); text-align: center;">
+                        <div class="col-md-9">
+                            <div class="popup-container">
+                                <label class="button sag4" for="login-popup3">Site</label>
+                                <input class="input1" type="checkbox" id="login-popup3">
+                                <div class="popup">
+                                    <label for="login-popup3"></label>
+                                    <div class="inner">
+                                        <div class="title">
+                                            <h6 class="mt-2">Site Duzenleme / Sil / Ekle</h6>
+                                        </div>
+                                        <div class="col-md-9 sag">
+                                            <div class="container mt-5">
+                                              <div class="row">
+                                                <div class="col-md-12">
+                                                  <h5>Site</h5>
+                                                  <table class="table table-hover table-sm">
+                                                    <thead>
+                                                      <td>Key</td>
+                                                      <td>Site Durumu</td>
+                                                      <td>DÜZENLE</td>
+                                                      <td>SİL</td>
+                                                    </thead>
+                                                    <tbody>
+                                                      <tr *ngFor="let Site of Sitemi">
+                                                        <td>{{Site.key}}</td>
+                                                        <td>{{Site.sdurum}}</td>
+                                                        <td><button class="btn btn-outline-warning" (click)="SiteDuzenle(Site)">Düzenle</button></td>
+                                                        <td><button class="btn btn-outline-danger" (click)="SiteSil(Site)">Sil</button></td>
+                                                      </tr>
+                                                    </tbody>
+                                                  </table>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="container">
+                                              <div class="row">
+                                                <h5 class="mt-3">Site Durumu Ekle</h5>
+                                                  <form #SitekayitForm="ngForm" (ngSubmit)="SiteKaydet()">
+                                                    <div class="col-md-12">
+                                                      <div class="form-group">
+                                                        <label class="label1 mt-2">Site Durumu Adı</label>
+                                                        <input type="text" name="sdurum" class="form-control" #sdurum ngModel [(ngModel)]="secsite.sdurum"
+                                                          required>
+                                                        <input type="hidden" name="id" class="form-control" #id ngModel [(ngModel)]="secsite.key">
+                                                      </div>
+                                                      <div class="container">
+                                                        <div class="row ">
+                                                          <div class="btn btn-transparent btn-block " >
+                                                            <input type="submit" value="Kaydet" class="btn btn-outline-success btn-block" style="width: 100%;" [disabled]="SitekayitForm.invalid">
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                      <div class="container">
+                                                        <div class="row">
+                                                          <div class="btn btn-transparent ml-3 mt-2" *ngIf="secsite.id!=0">
+                                                            <div class="mt-3" [ngClass]="sonuc.islem ? 'alert alert-success':'alert alert-danger'"
+                                                              *ngIf="sonuc.mesaj?.length>0">{{sonuc.mesaj}}</div>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                  </form>
+                                              </div>
+                                            </div>
+                                          </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer" style="background-color: black;"></div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card sag1" style="width: 360px;">
+                    <div class="card-header" style="background-color: black;"></div>
+                    <div class="card-body" style="background-color: rgb(59, 59, 59); text-align: center;">
+                        <div class="col-md-9">
+                            <div class="popup-container">
+                                <label class="button sag4" for="login-popup4">Takas</label>
+                                <input class="input1" type="checkbox" id="login-popup4">
+                                <div class="popup">
+                                    <label for="login-popup4"></label>
+                                    <div class="inner">
+                                        <div class="title">
+                                            <h6 class="mt-2">Takas Duzenleme / Sil / Ekle</h6>
+                                        </div>
+                                        <div class="col-md-9 sag">
+                                            <div class="container mt-5">
+                                              <div class="row">
+                                                <div class="col-md-12">
+                                                  <h5>Takas</h5>
+                                                  <table class="table table-hover table-sm">
+                                                    <thead>
+                                                      <td>Key</td>
+                                                      <td>Takas Durumu</td>
+                                                      <td>DÜZENLE</td>
+                                                      <td>SİL</td>
+                                                    </thead>
+                                                    <tbody>
+                                                      <tr *ngFor="let Takas of Takasd">
+                                                        <td>{{Takas.key}}</td>
+                                                        <td>{{Takas.durum}}</td>
+                                                        <td><button class="btn btn-outline-warning" (click)="TakDuzenle(Takas)">Düzenle</button></td>
+                                                        <td><button class="btn btn-outline-danger" (click)="TakSil(Takas)">Sil</button></td>
+                                                      </tr>
+                                                    </tbody>
+                                                  </table>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="container">
+                                              <div class="row">
+                                                <h5 class="mt-3">Takas Durumu Ekle</h5>
+                                                  <form #TakaskayitForm="ngForm" (ngSubmit)="TakKaydet()">
+                                                    <div class="col-md-12">
+                                                      <div class="form-group">
+                                                        <label class="label1 mt-2">Takas Durumu Adı</label>
+                                                        <input type="text" name="durum" class="form-control" #durum ngModel [(ngModel)]="sectakas.durum"
+                                                          required>
+                                                        <input type="hidden" name="id" class="form-control" #id ngModel [(ngModel)]="sectakas.key">
+                                                      </div>
+                                                      <div class="container">
+                                                        <div class="row ">
+                                                          <div class="btn btn-transparent btn-block " >
+                                                            <input type="submit" value="Kaydet" class="btn btn-outline-success btn-block" style="width: 100%;" [disabled]="TakaskayitForm.invalid">
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                      <div class="container">
+                                                        <div class="row">
+                                                          <div class="btn btn-transparent ml-3 mt-2" *ngIf="sectakas.id!=0">
+                                                            <div class="mt-3" [ngClass]="sonuc.islem ? 'alert alert-success':'alert alert-danger'"
+                                                              *ngIf="sonuc.mesaj?.length>0">{{sonuc.mesaj}}</div>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                  </form>
+                                              </div>
+                                            </div>
+                                          </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer" style="background-color: black;"></div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card sag1" style="width: 360px;">
+                    <div class="card-header" style="background-color: black;"></div>
+                    <div class="card-body" style="background-color: rgb(59, 59, 59);text-align: center;">
+                        <div class="col-md-9">
+                            <div class="popup-container">
+                                <label class="button sag4" for="login-popup5">Tapu</label>
+                                <input class="input1" type="checkbox" id="login-popup5">
+                                <div class="popup">
+                                    <label for="login-popup5"></label>
+                                    <div class="inner">
+                                        <div class="title">
+                                            <h6 class="mt-2">Tapu Duzenleme / Sil / Ekle</h6>
+                                        </div>
+                                        <div class="col-md-9 sag">
+                                            <div class="container mt-5">
+                                              <div class="row">
+                                                <div class="col-md-12">
+                                                  <h5>Tapu</h5>
+                                                  <table class="table table-hover table-sm">
+                                                    <thead>
+                                                      <td>Key</td>
+                                                      <td>Tapu Durumu</td>
+                                                      <td>DÜZENLE</td>
+                                                      <td>SİL</td>
+                                                    </thead>
+                                                    <tbody>
+                                                      <tr *ngFor="let Tapu of Tapud">
+                                                        <td>{{Tapu.key}}</td>
+                                                        <td>{{Tapu.tap}}</td>
+                                                        <td><button class="btn btn-outline-warning" (click)="TapuDuzenle(Tapu)">Düzenle</button></td>
+                                                        <td><button class="btn btn-outline-danger" (click)="TapuSil(Tapu)">Sil</button></td>
+                                                      </tr>
+                                                    </tbody>
+                                                  </table>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="container">
+                                              <div class="row">
+                                                <h5 class="mt-3">Tapu Durumu Ekle</h5>
+                                                  <form #TapukayitForm="ngForm" (ngSubmit)="TapuKaydet()">
+                                                    <div class="col-md-12">
+                                                      <div class="form-group">
+                                                        <label class="label1 mt-2">Tapu Durumu Adı</label>
+                                                        <input type="text" name="tap" class="form-control" #tap ngModel [(ngModel)]="sectapu.tap"
+                                                          required>
+                                                        <input type="hidden" name="id" class="form-control" #id ngModel [(ngModel)]="sectapu.key">
+                                                      </div>
+                                                      <div class="container">
+                                                        <div class="row ">
+                                                          <div class="btn btn-transparent btn-block " >
+                                                            <input type="submit" value="Kaydet" class="btn btn-outline-success btn-block" style="width: 100%;" [disabled]="TapukayitForm.invalid">
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                      <div class="container">
+                                                        <div class="row">
+                                                          <div class="btn btn-transparent ml-3 mt-2" *ngIf="sectapu.id!=0">
+                                                            <div class="mt-3" [ngClass]="sonuc.islem ? 'alert alert-success':'alert alert-danger'"
+                                                              *ngIf="sonuc.mesaj?.length>0">{{sonuc.mesaj}}</div>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                  </form>
+                                              </div>
+                                            </div>
+                                          </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer" style="background-color: black;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card sag1" style="width: 360px;">
+                    <div class="card-header" style="background-color: black;"></div>
+                    <div class="card-body" style="background-color: rgb(59, 59, 59); text-align: center;">
+                        <div class="col-md-9">
+                            <div class="popup-container">
+                                <label class="button sag4" for="login-popup6">Alan</label>
+                                <input class="input1" type="checkbox" id="login-popup6">
+                                <div class="popup">
+                                    <label for="login-popup6"></label>
+                                    <div class="inner">
+                                        <div class="title">
+                                            <h6 class="mt-2">Alan Duzenleme / Sil / Ekle</h6>
+                                        </div>
+                                        <div class="col-md-9 sag">
+                                            <div class="container mt-5">
+                                              <div class="row">
+                                                <div class="col-md-12">
+                                                  <h5>Alan</h5>
+                                                  <table class="table table-hover table-sm">
+                                                    <thead>
+                                                      <td>Key</td>
+                                                      <td>Alan</td>
+                                                      <td>DÜZENLE</td>
+                                                      <td>SİL</td>
+                                                    </thead>
+                                                    <tbody>
+                                                      <tr *ngFor="let alan of ATuru">
+                                                        <td>{{alan.key}}</td>
+                                                        <td>{{alan.alantur}}</td>
+                                                        <td><button class="btn btn-outline-warning" (click)="AlanDuzenle(alan)">Düzenle</button></td>
+                                                        <td><button class="btn btn-outline-danger" (click)="AlanSil(alan)">Sil</button></td>
+                                                      </tr>
+                                                    </tbody>
+                                                  </table>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="container">
+                                              <div class="row">
+                                                <h5 class="mt-3">Alan Ekle</h5>
+                                                  <form #AlankayitForm="ngForm" (ngSubmit)="AlanKaydet()">
+                                                    <div class="col-md-12">
+                                                      <div class="form-group">
+                                                        <label class="label1 mt-2">Alan Adı</label>
+                                                        <input type="text" name="alantur" class="form-control" #alantur ngModel [(ngModel)]="secalan.alantur"
+                                                          required>
+                                                        <input type="hidden" name="id" class="form-control" #id ngModel [(ngModel)]="secalan.key">
+                                                      </div>
+                                                      <div class="container">
+                                                        <div class="row ">
+                                                          <div class="btn btn-transparent btn-block " >
+                                                            <input type="submit" value="Kaydet" class="btn btn-outline-success btn-block" style="width: 100%;" [disabled]="AlankayitForm.invalid">
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                      <div class="container">
+                                                        <div class="row">
+                                                          <div class="btn btn-transparent ml-3 mt-2" *ngIf="secalan.id!=0">
+                                                            <div class="mt-3" [ngClass]="sonuc.islem ? 'alert alert-success':'alert alert-danger'"
+                                                              *ngIf="sonuc.mesaj?.length>0">{{sonuc.mesaj}}</div>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                  </form>
+                                              </div>
+                                            </div>
+                                          </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                    
+                    </div>
+                    <div class="card-footer" style="background-color: black;"></div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card sag1" style="width: 360px;">
+                    <div class="card-header" style="background-color: black;"></div>
+                    <div class="card-body" style="background-color: rgb(59, 59, 59); text-align: center;">
+                        <div class="col-md-9">
+                            <div class="popup-container">
+                                <label class="button sag4" for="login-popup7">Yakıt</label>
+                                <input class="input1" type="checkbox" id="login-popup7">
+                                <div class="popup">
+                                    <label for="login-popup7"></label>
+                                    <div class="inner">
+                                        <div class="title">
+                                            <h6 class="mt-2">Yakıt Duzenleme / Sil / Ekle</h6>
+                                        </div>
+                                        <div class="col-md-9 sag">
+                                            <div class="container mt-5">
+                                              <div class="row">
+                                                <div class="col-md-12">
+                                                  <h5>Yakıt</h5>
+                                                  <table class="table table-hover table-sm">
+                                                    <thead>
+                                                      <td>Key</td>
+                                                      <td>Yakıt</td>
+                                                      <td>DÜZENLE</td>
+                                                      <td>SİL</td>
+                                                    </thead>
+                                                    <tbody>
+                                                      <tr *ngFor="let Yakit of Yakitd">
+                                                        <td>{{Yakit.key}}</td>
+                                                        <td>{{Yakit.yakitad}}</td>
+                                                        <td><button class="btn btn-outline-warning" (click)="YakitDuzenle(Yakit)">Düzenle</button></td>
+                                                        <td><button class="btn btn-outline-danger" (click)="YakitSil(Yakit)">Sil</button></td>
+                                                      </tr>
+                                                    </tbody>
+                                                  </table>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="container">
+                                              <div class="row">
+                                                <h5 class="mt-3">Yakıt Durumu Ekle</h5>
+                                                  <form #YakitkayitForm="ngForm" (ngSubmit)="YakitKaydet()">
+                                                    <div class="col-md-12">
+                                                      <div class="form-group">
+                                                        <label class="label1 mt-2">Yakıt Adı</label>
+                                                        <input type="text" name="yakitad" class="form-control" #yakitad ngModel [(ngModel)]="secyakit.yakitad"
+                                                          required>
+                                                        <input type="hidden" name="id" class="form-control" #id ngModel [(ngModel)]="secyakit.key">
+                                                      </div>
+                                                      <div class="container">
+                                                        <div class="row ">
+                                                          <div class="btn btn-transparent btn-block " >
+                                                            <input type="submit" value="Kaydet" class="btn btn-outline-success btn-block" style="width: 100%;" [disabled]="YakitkayitForm.invalid">
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                      <div class="container">
+                                                        <div class="row">
+                                                          <div class="btn btn-transparent ml-3 mt-2" *ngIf="secyakit.id!=0">
+                                                            <div class="mt-3" [ngClass]="sonuc.islem ? 'alert alert-success':'alert alert-danger'"
+                                                              *ngIf="sonuc.mesaj?.length>0">{{sonuc.mesaj}}</div>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                  </form>
+                                              </div>
+                                            </div>
+                                          </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer" style="background-color: black;"></div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card sag1" style="width: 360px;">
+                    <div class="card-header" style="background-color: black;"></div>
+                    <div class="card-body" style="background-color: rgb(59, 59, 59); text-align: center;">
+                        <div class="col-md-9">
+                            <div class="popup-container">
+                                <label class="button sag4" for="login-popup8">Yapı Durumu</label>
+                                <input class="input1" type="checkbox" id="login-popup8">
+                                <div class="popup">
+                                    <label for="login-popup8"></label>
+                                    <div class="inner">
+                                        <div class="title">
+                                            <h6 class="mt-2">Yapı Durumu Duzenleme / Sil / Ekle</h6>
+                                        </div>
+                                        <div class="col-md-9 sag">
+                                            <div class="container mt-5">
+                                              <div class="row">
+                                                <div class="col-md-12">
+                                                  <h5>Yapı Durumu</h5>
+                                                  <table class="table table-hover table-sm">
+                                                    <thead>
+                                                      <td>Key</td>
+                                                      <td>Yapı Durumu</td>
+                                                      <td>DÜZENLE</td>
+                                                      <td>SİL</td>
+                                                    </thead>
+                                                    <tbody>
+                                                      <tr *ngFor="let YapiDurumu of YapiD">
+                                                        <td>{{YapiDurumu.key}}</td>
+                                                        <td>{{YapiDurumu.ydurum}}</td>
+                                                        <td><button class="btn btn-outline-warning" (click)="YapiDuzenle(YapiDurumu)">Düzenle</button></td>
+                                                        <td><button class="btn btn-outline-danger" (click)="YapiSil(YapiDurumu)">Sil</button></td>
+                                                      </tr>
+                                                    </tbody>
+                                                  </table>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="container">
+                                              <div class="row">
+                                                <h5 class="mt-3">Yapı Durumu Ekle</h5>
+                                                  <form #YapikayitForm="ngForm" (ngSubmit)="YapiKaydet()">
+                                                    <div class="col-md-12">
+                                                      <div class="form-group">
+                                                        <label class="label1 mt-2">Yapı Durumu Adı</label>
+                                                        <input type="text" name="ydurum" class="form-control" #ydurum ngModel [(ngModel)]="secyap.ydurum"
+                                                          required>
+                                                        <input type="hidden" name="id" class="form-control" #id ngModel [(ngModel)]="secyap.key">
+                                                      </div>
+                                                      <div class="container">
+                                                        <div class="row ">
+                                                          <div class="btn btn-transparent btn-block " >
+                                                            <input type="submit" value="Kaydet" class="btn btn-outline-success btn-block" style="width: 100%;" [disabled]="YapikayitForm.invalid">
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                      <div class="container">
+                                                        <div class="row">
+                                                          <div class="btn btn-transparent ml-3 mt-2" *ngIf="secyap.id!=0">
+                                                            <div class="mt-3" [ngClass]="sonuc.islem ? 'alert alert-success':'alert alert-danger'"
+                                                              *ngIf="sonuc.mesaj?.length>0">{{sonuc.mesaj}}</div>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                  </form>
+                                              </div>
+                                            </div>
+                                          </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer" style="background-color: black;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-3">
+      <div class="row">
+        <div class="col-md-9">
+          <div class="card sag1">
+            <div class="card-header" style="background-color: black;"></div>
+            <div class="card-body" style="background-color: rgb(59, 59, 59); text-align: center;">
+              <div class="col-md-6 popup-container">
+                <label class="button sag5" for="login-popup11">Ürünler</label>
+                <input class="input1" type="checkbox" id="login-popup11">
+                <div class="popup">
+                    <label for="login-popup11"></label>
+                    <div class="inner1">
+                        <div class="title">
+                            <h6 class="mt-2">Ürünler FORMU</h6>
+                        </div>
+                        <div class="container-fluid mt-5">
+                          <div class="row">
+                            <div class="col-md-12">
+                              <h5>İLANLAR</h5>
+                              <table class="table table-hover table-sm">
+                                <thead>
+                                  <td>ID</td>
+                                  <td>Ürün Adı</td>
+                                  <td>Ürün Fiyat</td>
+                                  <td>Oda</td>
+                                  <td>Salon</td>
+                                  <td>Banyo</td>
+                                  <td>Brüt</td>
+                                  <td>Net</td>
+                                  <td>Bina Yaşı</td>
+                                  <td>Bina Kat</td>
+                                  <td>Aidat</td>
+                                  <td>Kira</td>
+                                  <td>Adres</td>
+                                  <td>Takas</td>
+                                  <td>Site</td>
+                                  <td>Cephe</td>
+                                  <td>Kullanım Durumu</td>
+                                  <td>Yapı Durumu</td>
+                                  <td>Yakit</td>
+                                  <td>Kategori</td>
+                                  <td>Tapu</td>
+                                  <td>BKat</td>
+                                  <td>Açıklama</td>
+                                </thead>
+                                <tbody>
+                                  <tr *ngFor="let Urun of Urunler">
+                                    <td>{{Urun.id}}</td>
+                                    <td>{{Urun.urunadi}}</td>
+                                    <td>{{Urun.urunfiyat}}</td>
+                                    <td>{{Urun.oda}}</td>
+                                    <td>{{Urun.salon}}</td>
+                                    <td>{{Urun.banyo}}</td>
+                                    <td>{{Urun.brut}}</td>
+                                    <td>{{Urun.net}}</td>
+                                    <td>{{Urun.binayas}}</td>
+                                    <td>{{Urun.binakat}}</td>
+                                    <td>{{Urun.aidat}}</td>
+                                    <td>{{Urun.kira}}</td>
+                                    <td>{{Urun.adres}}</td>
+                                    <td>{{Urun.Takas}}</td>
+                                    <td>{{Urun.Site}}</td>
+                                    <td>{{Urun.Cephe}}</td>
+                                    <td>{{Urun.KullanimDurumu}}</td>
+                                    <td>{{Urun.YapiDurumu}}</td>
+                                    <td>{{Urun.Yakit}}</td>
+                                    <td>{{Urun.alan}}</td>
+                                    <td>{{Urun.Tapu}}</td>
+                                    <td>{{Urun.bulkat}}</td>
+                                    <td>{{Urun.img}}</td>
+                                    <td><button class="btn btn-outline-danger" (click)="UrunSil(Urun)">Sil</button></td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="container">
+                          <div class="row">
+                            <div class="btn btn-transparent ml-3 mt-2" *ngIf="securun.key!=''">
+                              <button style="width: 100%;" class="btn btn-outline-danger ml-3">Vazgeç</button>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div class="card-footer" style="background-color: black;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
